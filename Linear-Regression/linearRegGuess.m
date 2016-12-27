@@ -1,3 +1,12 @@
+%--------------------------------------------------------%
+% We're going to look at how the line of best fit compares
+% with 3 different 'guesses' at what the constants in 
+% y = mx + c
+% are. We are going to call m and c theta, a vector of 
+% length 2: [c; m] or [theta0; theta1].
+% We will see the difference in the 'cost' of each example.
+%--------------------------------------------------------%
+
 % Set up example data
 x = [1272; 1385; 1877; 1294; 873; 784; 801; 729; 422; 346];
 y = [355; 290; 290; 155; 125; 110; 100; 60; 55; 45];

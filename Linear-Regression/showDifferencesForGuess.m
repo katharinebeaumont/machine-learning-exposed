@@ -1,7 +1,15 @@
+%--------------------------------------------------------%
+% This function will plot the example data, then the line
+% of best fit with our guess at 'theta', the constants in
+% y = mx + c. We will then visualise the differences between
+% the example data, and the predicted line of best fit, 
+% before working out the 'cost' of the predicted line of best
+% fit - how 'correct' is it, for our example data?
+%--------------------------------------------------------%
 
-function J = showDifferencesForGuess(X, y, theta)
+function showDifferencesForGuess(X, y, theta)
 	
-	% Plot the graph. We are looking at the second column of the matrix X here,
+	% Plot the graph of the data. We are looking at the second column of the matrix X,
 	%  because this is the one with the data. The first column, we initialised with
 	%  1s so we can use matrices in our computation.
 	plot(X(:,2),y,'rx','MarkerSize',10);
@@ -12,8 +20,7 @@ function J = showDifferencesForGuess(X, y, theta)
 	hold on; 
 
 	fprintf('Theta is:');
-	fprintf(' %d', theta);
-	disp('');
+	fprintf(' %d\n', theta);
 	disp('Press enter to see the predicted line of best fit.');
 	pause;
 
@@ -56,11 +63,8 @@ function J = showDifferencesForGuess(X, y, theta)
 		plot([X(:,2)(j),X(:,2)(j)],[predicted_y(j),y(j)], '-');
 	end
 
-	abs_difference_matrix = ones(m,3);
-	for k = 1:m
-		abs_difference_matrix(k,:) = [predicted_y(k),y(k),abs(predicted_y(k) - y(k))];
-		sq_difference_matrix(k,:) = [predicted_y(k),y(k),(predicted_y(k) - y(k))^2];
-	end
+	abs_difference_matrix = [predicted_y,y,abs(predicted_y - y)];
+	sq_difference_matrix = [predicted_y,y,((predicted_y - y).^2)];
 
 	disp('The following shows the absolute difference between the predicted values of y,');
 	disp(' versus the actual values from the training examples');
@@ -74,8 +78,13 @@ function J = showDifferencesForGuess(X, y, theta)
 	disp(' versus the actual values from the training examples');
 	list_in_columns({"h(x)","   y","   Error"}, 45), disp("================================="), disp(sq_difference_matrix);
 
+	% This is calculating the sum of all of the squared differences
+	%  between the predicted line of best fit, and the actual y values
+	%  from the data. We then take an average over all of the training
+	%  examples, by dividing by m.
 	J=(sum(sq_difference_matrix(:,3)))/(2*m);
 	fprintf('For theta value:');
 	fprintf(' %d', theta);
 	fprintf(', the Cost Function J is %d', J);
+
 end
