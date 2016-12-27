@@ -2,39 +2,48 @@
 x = [1272; 1385; 1877; 1294; 873; 784; 801; 729; 422; 346];
 y = [355; 290; 290; 155; 125; 110; 100; 60; 55; 45];
 
-% Initialise the extra column on x
+% Initialise the extra column on x, so "y = mx + c"
+%  is instead "y = (c*1) + (m*x)"
+%  - this means that we can use a matrix X where the first column
+%  has the value 1, and the second is the x value. This makes it easier to compute. 
+%  The matrix will look like this:
+%
+%     1  1272
+%     1  1385
+%     1  1877
+%     .  ...
+%     1  346
+%
+%  It has 2 columns, and the number of rows = the length of x
 m = length(x);
-x = [(ones(m,1)),x];
-
-% Plot the graph
-plot(x(:,2),y,'rx','MarkerSize',10);
-ylabel('Price in 1000s');
-xlabel('Size in square feet');
+%  ones(m,1) initialises a matrix where every value is 1, and the size
+%  is m rows and 1 column
+X = [(ones(m,1)),x];
 
 % Initialise theta to some value: here we are guessing that for 
 % y = mx + c, c is 0.7 and m is 0.1:
-% y = 0.1x + 0.7
+%  Rearranging this to y = (c*1) + (m*x),
+% y = (0.7*1) + (0.1*x)
 theta = [0.7; 0.1];
 
-% Keep the previous plot visible
-hold on; 
+% See the file 'showDifferencesForGuess.m' for details
+showDifferencesForGuess(X, y, theta);
 
-% Plot the predicted line, based on theta and how it transforms x
-predicted_y = x*theta;
-plot(x(:,2), predicted_y, '-')
-legend('Training data', 'Linear regression');
+% Now let's try with another example
+pause;
+disp('Press enter to try with another guess');
+% Clear down the previous plots
+close all;
 
-hold on; 
-
-% Illustrate the difference between the predicted value at y for the first example, 
-% and the actual value of y from our example data
-plot([x(1,2),x(1,2)],[predicted_y(1),y(1)],'-');
+% We're going to keep the y intercept, c, the same, and change the 
+%  gradient of the line, m to 0.2
+% y = (0.7*1) + (0.2*x)
+theta = [0.7; 0.2];
+showDifferencesForGuess(X, y, theta);
 
 pause;
-hold on;
+disp('Press enter to try with another guess');
+close all;
 
-% Now draw all of the other differences
-for j = 2:m
-	hold on;
-	plot([x(:,2)(j),x(:,2)(j)],[predicted_y(j),y(j)], '-');
-end
+theta = [0.7; 0.3];
+showDifferencesForGuess(X, y, theta);
