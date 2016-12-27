@@ -29,7 +29,7 @@ for i = 1:iterations
 	J_history(i+1) = computeCost(X, y, theta);
 end
 
-% Compare theta0 with the cost function values
+% Compare theta1 with the cost function values
 plot(theta_history(:,2),J_history,'rx','MarkerSize',5);
 ylabel('The Cost Function J');
 xlabel('Theta1');
