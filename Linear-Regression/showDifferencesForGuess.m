@@ -6,14 +6,18 @@ function J = showDifferencesForGuess(X, y, theta)
 	%  1s so we can use matrices in our computation.
 	plot(X(:,2),y,'rx','MarkerSize',10);
 	ylabel('Price in 1000s');
-	Xlabel('Size in square feet');
+	xlabel('Size in square feet');
 
 	% Keep the graph visible.
 	hold on; 
 
-	% Now, plot the predicted line, based on theta and how it transforms X
-	fprintf('Theta is %d.', theta);
+	fprintf('Theta is:');
+	fprintf(' %d', theta);
+	disp('');
+	disp('Press enter to see the predicted line of best fit.');
+	pause;
 
+	% Now, plot the predicted line, based on theta and how it transforms X
 	m = length(X);
 	% predicted_y is what our hypothesis, y = (c*1) + (m*x), works out the y value as being.
 	%  We can then compare this with the actual values of y.
@@ -29,12 +33,14 @@ function J = showDifferencesForGuess(X, y, theta)
 
 	hold on; 
 
+	disp('Press enter to see the difference between one example and the predicted line of best fit.');
+	pause;
 	% Illustrate the difference between the predicted value at y for the first example, 
 	%  and the actual value of y for the first example.
 	%  The final argument here '-' tells the plot function to draw a line between them.
 	plot([X(1,2),X(1,2)],[predicted_y(1),y(1)],'-');
 
-	disp('Press enter to see the differences for all of the training examples against the guessed');
+	disp('Press enter to see the differences for all of the training examples against the predicted');
 	disp(' line of best fit.');
 	pause;
 
@@ -69,5 +75,7 @@ function J = showDifferencesForGuess(X, y, theta)
 	list_in_columns({"h(x)","   y","   Error"}, 45), disp("================================="), disp(sq_difference_matrix);
 
 	J=(sum(sq_difference_matrix(:,3)))/(2*m);
-	fprintf('The Cost Function J is %d', J);
+	fprintf('For theta value:');
+	fprintf(' %d', theta);
+	fprintf(', the Cost Function J is %d', J);
 end
