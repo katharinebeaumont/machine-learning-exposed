@@ -45,7 +45,8 @@ function showDifferencesForGuess(X, y, theta)
 	% Illustrate the difference between the predicted value at y for the first example, 
 	%  and the actual value of y for the first example.
 	%  The final argument here '-' tells the plot function to draw a line between them.
-	plot([X(1,2),X(1,2)],[predicted_y(1),y(1)],'-');
+	x_data = X(:,2);
+	plot([x_data(1),x_data(1)],[predicted_y(1),y(1)],'-');
 
 	disp('Press enter to see the differences for all of the training examples against the predicted');
 	disp(' line of best fit.');
@@ -60,7 +61,7 @@ function showDifferencesForGuess(X, y, theta)
 		%We are plotting the x value at each point (ignoring the bias)
 		% against the predicted y, and the actual training example
 		% to draw a line between them
-		plot([X(:,2)(j),X(:,2)(j)],[predicted_y(j),y(j)], '-');
+		plot([x_data(j),x_data(j)],[predicted_y(j),y(j)], '-');
 	end
 
 	abs_difference_matrix = [predicted_y,y,abs(predicted_y - y)];
@@ -68,7 +69,7 @@ function showDifferencesForGuess(X, y, theta)
 
 	disp('The following shows the absolute difference between the predicted values of y,');
 	disp(' versus the actual values from the training examples');
-	list_in_columns({"h(x)","   y","   Error"}, 45), disp("================================="), disp(abs_difference_matrix);
+	list_in_columns({'h(x)','   y','   Error'}, 45), disp('================================='), disp(abs_difference_matrix);
 
 	disp('Press enter to show the squared difference.');
 	hold on;
@@ -76,7 +77,7 @@ function showDifferencesForGuess(X, y, theta)
 
 	disp('The following shows the squared difference between the predicted values of y,');
 	disp(' versus the actual values from the training examples');
-	list_in_columns({"h(x)","   y","   Error"}, 45), disp("================================="), disp(sq_difference_matrix);
+	list_in_columns({'h(x)','   y','   Error'}, 45), disp('================================='), disp(sq_difference_matrix);
 
 	% This is calculating the sum of all of the squared differences
 	%  between the predicted line of best fit, and the actual y values
