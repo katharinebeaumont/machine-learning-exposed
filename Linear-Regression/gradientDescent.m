@@ -7,40 +7,41 @@
 %--------------------------------------------------------%
 
 
-function [theta, theta_history, J_history] = gradientDescent(x, y, theta, alpha, iterations)
+function [theta, theta_history, J_history] = gradientDescent(X, y, theta, alpha, iterations)
 
-% The size of our example data
-m = length(y);
+    % The size of our example data
+    m = length(y);
 
-% We're going to keep track of how the cost function J changes 
-%  depending on the values of theta.
-J_history = zeros(iterations, 1);
+    % We're going to keep track of how the cost function J changes 
+    %  depending on the values of theta.
+    J_history = zeros(iterations+1, 1);
 
-% We're going to keep track of how gradient descent changes the values
-%  of theta, so we can later plot theta against the cost function.
-theta_history = zeros(iterations, length(theta));
+    % We're going to keep track of how gradient descent changes the values
+    %  of theta, so we can later plot theta against the cost function.
+    theta_history = zeros(iterations+1, length(theta));
 
-% Initialise our J_history and theta_history matrices with the 
-%  first values.
-J_history(1) = computeCost(x, y, theta);
-theta_history(1,:) = theta';  
+    % Initialise our J_history and theta_history matrices with the 
+    %  first values.
+    J_history(1) = computeCost(X, y, theta);
+    theta_history(1,:) = theta';  
 
-for i = 1:iterations
+    for i = 1:iterations
 
-    % We change each value of theta one at a time, and we don't want to set
-    %  the new value of theta until we have calculated each of the elements.
-    for j = 1:length(theta)
-        new_theta(j) = theta(j) - (alpha/m)*sum((x*theta - y).*x(:,j));
+        % We change each value of theta one at a time, and we don't want to set
+        %  the new value of theta until we have calculated each of the elements.
+        new_theta = zeros(size(theta));
+        for j = 1:length(theta)
+            new_theta(j) = theta(j) - (alpha/m)*sum((X*theta - y).*X(:,j));
+        end
+
+        % Save the cost J in every iteration, and the corresponding value of theta.
+        %  We're doing 'i+1' here because we want the first and last values (which will
+        %  be length i+1)
+        theta_history((i+1),:) = new_theta'; 
+        theta = new_theta;
+        J_history(i+1) = computeCost(X, y, theta);
+        
     end
-
-    theta = new_theta;
-    % Save the cost J in every iteration, and the corresponding value of theta.
-    %  We're doing 'i+1' here because we want the first and last values (which will
-    %  be length i+1)
-    theta_history((i+1),:) = theta';    
-    J_history(i+1) = computeCost(x, y, theta);
-    
-end
 
 
 end

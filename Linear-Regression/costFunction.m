@@ -1,7 +1,8 @@
 %--------------------------------------------------------%
 %
 % Here, we are going to show how the cost function looks
-% different for different values of theta.
+% different for different values of theta. Next see 
+% gradientDescentExample.m for a more step-by-step look.
 %
 %--------------------------------------------------------%
 

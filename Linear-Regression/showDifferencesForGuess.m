@@ -15,7 +15,7 @@ function showDifferencesForGuess(X, y, theta)
 	plot(X(:,2),y,'rx','MarkerSize',10);
 	ylabel('Price in 1000s');
 	xlabel('Size in square feet');
-
+	title('House price examples');
 	% Keep the graph visible.
 	hold on; 
 
