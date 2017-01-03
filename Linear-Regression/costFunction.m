@@ -6,6 +6,9 @@
 %
 %--------------------------------------------------------%
 
+% Close any open figures
+close;
+
 % Set up the example data
 x = [1272; 1385; 1877; 1294; 873; 784; 801; 729; 422; 346];
 y = [355; 290; 290; 155; 125; 110; 100; 60; 55; 45];
@@ -21,7 +24,7 @@ J=computeCost(X, y, theta);
 %  theta0 represents the y intercept (c of y = mx + c) whereas
 %  theta1 is the gradient (m of y = mx + c) and the one that directly
 %  transforms the training data. We could also have looked at theta0.
-iterations = 130
+iterations = 130;
 J_history = [J;zeros(iterations, 1)];
 theta_history = [theta';zeros(iterations, length(theta))];
 for i = 1:iterations
@@ -34,3 +37,4 @@ end
 plot(theta_history(:,2),J_history,'rx','MarkerSize',5);
 ylabel('The Cost Function J');
 xlabel('Theta1');
+title('How Theta changes the Cost Function J');

@@ -9,6 +9,8 @@
 
 function showDifferencesForGuess(X, y, theta)
 	
+    % Close anything open 
+    close all;
 	% Plot the graph of the data. We are looking at the second column of the matrix X,
 	%  because this is the one with the data. The first column, we initialised with
 	%  1s so we can use matrices in our computation.
@@ -19,8 +21,9 @@ function showDifferencesForGuess(X, y, theta)
 	% Keep the graph visible.
 	hold on; 
 
-	fprintf('Theta is:');
-	fprintf(' %d\n', theta);
+	fprintf('Theta is: ');
+    fprintf('%d ', theta);
+    fprintf('\n');
 	disp('Press enter to see the predicted line of best fit.');
 	pause;
 
@@ -69,7 +72,9 @@ function showDifferencesForGuess(X, y, theta)
 
 	disp('The following shows the absolute difference between the predicted values of y,');
 	disp(' versus the actual values from the training examples');
-	list_in_columns({'h(x)','   y','   Error'}, 45), disp('================================='), disp(abs_difference_matrix);
+	disp('   h(x)   |    y    |  Error');
+    disp('=================================');
+    disp(abs_difference_matrix);
 
 	disp('Press enter to show the squared difference.');
 	hold on;
@@ -77,7 +82,9 @@ function showDifferencesForGuess(X, y, theta)
 
 	disp('The following shows the squared difference between the predicted values of y,');
 	disp(' versus the actual values from the training examples');
-	list_in_columns({'h(x)','   y','   Error'}, 45), disp('================================='), disp(sq_difference_matrix);
+	disp('   h(x)   |    y    |  Error');
+    disp('=================================');
+    disp(sq_difference_matrix);
 
 	% This is calculating the sum of all of the squared differences
 	%  between the predicted line of best fit, and the actual y values
@@ -87,5 +94,6 @@ function showDifferencesForGuess(X, y, theta)
 	fprintf('For theta value:');
 	fprintf(' %d', theta);
 	fprintf(', the Cost Function J is %d', J);
+    fprintf('\n');
 
 end
