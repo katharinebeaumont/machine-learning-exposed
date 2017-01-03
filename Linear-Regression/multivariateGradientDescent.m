@@ -3,7 +3,7 @@
 % change the theta values and look at how all of them 
 % affect the cost function. Let's imagine we also know the
 % number of bedrooms for each example
-% ... MORE DESC NEEDED
+% ... MORE DESC NEEDED, plus a visualisation of the data
 %--------------------------------------------------------%
 
 x = [1272, 4; 1385, 4; 1877, 4; 1294, 3; 873, 3; 784, 3; 801, 2; 729, 2; 422, 1; 346, 1];
