@@ -29,6 +29,8 @@ function [theta, theta_history, J_history] = gradientDescent(X, y, theta, alpha,
 
         % We change each value of theta one at a time, and we don't want to set
         %  the new value of theta until we have calculated each of the elements.
+        % This works for any number of theta values, calculating them one at a time,
+        %  and then setting the new values once all of them have been calculated.
         new_theta = zeros(size(theta));
         for j = 1:length(theta)
             new_theta(j) = theta(j) - (alpha/m)*sum((X*theta - y).*X(:,j));

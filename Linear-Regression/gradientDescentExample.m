@@ -14,7 +14,7 @@
 % Set up example data again... this time, we are assuming that the hypothesis goes
 %  through the origin, so there is no need to add a column of ones to X, and we only
 %  have one theta, as we are only transforming the X data values.
-clear all;
+close all;
 X = [1272; 1385; 1877; 1294; 873; 784; 801; 729; 422; 346];
 y = [355; 290; 290; 155; 125; 110; 100; 60; 55; 45];
 
@@ -45,7 +45,7 @@ gradient = (1/m)*sum(X*theta - y);
 J=computeCost(X, y, theta);
 theta_attempts(2) = theta;
 J_examples(2) = J;
-figure(1), plot(X,X*theta,'-'), legend('0.101'), hold on;
+figure(1), plot(X,X*theta,'-'), hold on;
 disp('Line of best fit with theta = 0.101. Press enter to continue.');
 pause;
 % J =  4381.8
@@ -123,4 +123,4 @@ iterations = 100;
 % Now we can see how the theta found by gradient descent fits the line of best fit to the data
 disp('Press enter to see the line of best fit, using the theta value from gradient descent.');
 pause;
-figure(1), plot(X, X*theta, '-');
+figure(1), plot(X, X*theta, '-'), legend('Example data', 'Line of Best Fit [hypothesis]');
