@@ -11,6 +11,16 @@
 x = [1272; 1385; 1877; 1294; 873; 784; 801; 729; 422; 346];
 y = [355; 290; 290; 155; 125; 110; 100; 60; 55; 45];
 
+% Plot the data 
+plot(x,y,'rx','MarkerSize',10);
+axis([0,2000,0,400]);
+grid on;
+xlabel('Size in square feet');
+ylabel('Price in 1000s');
+title('House price examples');
+disp('Press enter to start fitting the hypothesis to the data');
+pause;
+
 % Initialise the extra column on x, so "y = mx + c"
 %  is instead "y = (c*1) + (m*x)"
 %  - this means that we can use a matrix X where the first column
@@ -35,6 +45,7 @@ X = [(ones(m,1)),x];
 % y = (0.7*1) + (0.1*x)
 theta = [0.7; 0.1];
 
+format shortG;
 % See the file 'showDifferencesForGuess.m' for details
 showDifferencesForGuess(X, y, theta);
 

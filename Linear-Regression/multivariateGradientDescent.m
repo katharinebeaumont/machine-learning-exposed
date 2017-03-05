@@ -29,3 +29,31 @@ J = computeCost(X, y, theta);
 fprintf('Cost for theta after gradient descent is %d\n', J);
 fprintf('Theta is: ');
 fprintf('%d ', theta);
+
+fprintf('Visualizing J(theta1, theta2) ...\n')
+
+% Grid over which we will calculate J
+iterations = 100;
+theta1_vals = linspace(0, 0.3, iterations);
+theta2_vals = linspace(2, 3, iterations);
+
+% Initialize J_vals to a matrix of 0's
+J_vals = zeros(length(theta1_vals), length(theta2_vals));
+
+% Fill out J_vals - we want to know what the cost function is for every
+% combination of thetas
+for i = 1:iterations
+    for j = 1:length(theta2_vals)
+	  t = [theta1_vals(i); theta2_vals(j)];    
+	  J_vals(i,j) = computeCost(X(:,2:3), y, t);
+    end
+end
+
+
+% Because of the way meshgrids work in the surf command, we need to 
+% transpose J_vals before calling surf, or else the axes will be flipped
+J_vals = J_vals';
+% Surface plot
+figure;
+surf(theta1_vals, theta2_vals, J_vals)
+xlabel('\theta_0'); ylabel('\theta_1');

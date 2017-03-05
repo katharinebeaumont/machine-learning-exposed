@@ -18,12 +18,14 @@ function showDifferencesForGuess(X, y, theta)
 	ylabel('Price in 1000s');
 	xlabel('Size in square feet');
 	title('House price examples');
+    axis([0,2000,0,600]);
+    % Show a grid.
+    grid on;
 	% Keep the graph visible.
 	hold on; 
 
-	fprintf('Theta is: ');
-    fprintf('%d ', theta);
-    fprintf('\n');
+	disp('Theta is: ');
+    disp(theta);
 	disp('Press enter to see the predicted line of best fit.');
 	pause;
 
@@ -45,6 +47,7 @@ function showDifferencesForGuess(X, y, theta)
 
 	disp('Press enter to see the difference between one example and the predicted line of best fit.');
 	pause;
+    
 	% Illustrate the difference between the predicted value at y for the first example, 
 	%  and the actual value of y for the first example.
 	%  The final argument here '-' tells the plot function to draw a line between them.
@@ -72,8 +75,8 @@ function showDifferencesForGuess(X, y, theta)
 
 	disp('The following shows the absolute difference between the predicted values of y,');
 	disp(' versus the actual values from the training examples');
-	disp('   h(x)   |    y    |  Error');
-    disp('=================================');
+	disp('         h(x)   |    y    |  Error');
+    disp('      =================================');
     disp(abs_difference_matrix);
 
 	disp('Press enter to show the squared difference.');
@@ -82,8 +85,8 @@ function showDifferencesForGuess(X, y, theta)
 
 	disp('The following shows the squared difference between the predicted values of y,');
 	disp(' versus the actual values from the training examples');
-	disp('   h(x)   |    y    |  Error');
-    disp('=================================');
+	disp('         h(x)   |    y    |  Error');
+    disp('      =================================');
     disp(sq_difference_matrix);
 
 	% This is calculating the sum of all of the squared differences
@@ -91,9 +94,9 @@ function showDifferencesForGuess(X, y, theta)
 	%  from the data. We then take an average over all of the training
 	%  examples, by dividing by m.
 	J=(sum(sq_difference_matrix(:,3)))/(2*m);
-	fprintf('For theta value:');
-	fprintf(' %d', theta);
-	fprintf(', the Cost Function J is %d', J);
-    fprintf('\n');
+	disp('For theta value: ');
+    disp(theta);
+	disp('The Cost Function J is: '); 
+    disp(J);
 
 end

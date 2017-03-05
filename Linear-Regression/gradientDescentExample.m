@@ -22,13 +22,14 @@ m = length(y);
 theta = [0.1];
 
 figure(1), plot(X,y,'rx','MarkerSize',10), ylabel('Price in 1000s'), xlabel('Size in square feet'), title('House price examples');
-figure(1), hold on;
+figure(1), axis([0,2000,0,400]), grid on, hold on;
 % We're going to look at 5 different values of theta to begin with, and keep
 %  track of them and the cost function at each point so we can plot them on a graph
 theta_attempts = ones(5,1);
 J_examples = ones(5,1);
+gradient_values = ones(5,1);
 
-gradient = (1/m)*sum(X*theta - y);
+gradient_values(1) = (1/m)*sum(X*theta - y);
 J=computeCost(X, y, theta);
 theta_attempts(1) = theta; %indexing in Octave/Matlab starts from 1, not 0
 J_examples(1) = J;
@@ -41,7 +42,7 @@ pause;
 
 % Let's increase theta a little bit
 theta = [0.101];
-gradient = (1/m)*sum(X*theta - y);
+gradient_values(2) = (1/m)*sum(X*theta - y);
 J=computeCost(X, y, theta);
 theta_attempts(2) = theta;
 J_examples(2) = J;
@@ -53,7 +54,7 @@ pause;
 % The cost function is smaller. Let's try increasing theta by a larger amount.
 
 theta = [0.111];
-gradient = (1/m)*sum(X*theta - y);
+gradient_values(3) = (1/m)*sum(X*theta - y);
 J=computeCost(X, y, theta);
 theta_attempts(3) = theta;
 J_examples(3) = J;
@@ -65,7 +66,7 @@ pause;
 % The cost function is much smaller again, so we can try increasing theta by a larger amount
 
 theta = [0.211];
-gradient = (1/m)*sum(X*theta - y);
+gradient_values(4) = (1/m)*sum(X*theta - y);
 J=computeCost(X, y, theta);
 theta_attempts(4) = theta;
 J_examples(4) = J;
@@ -79,7 +80,7 @@ pause;
 % see the cost function increase too:
 
 theta = [0.221];
-gradient = (1/m)*sum(X*theta - y);
+gradient_values(5) = (1/m)*sum(X*theta - y);
 J=computeCost(X, y, theta);
 theta_attempts(5) = theta;
 J_examples(5) = J;
@@ -90,13 +91,30 @@ pause;
 % gradient = 57.704
 % So the optimum value for theta is between 0.211 and 0.111
 
-disp('Press enter to see a graph of the results.');
-pause;
+disp('The following shows theta1, the Cost Function and gradient for the examples: ');
+format shortG;
+disp('   theta1   |    Cost Function    |  Gradient');
+disp('=================================');
+disp([theta_attempts,J_examples,gradient_values]);
 
-figure(2), plot(theta_attempts, J_examples, '-');
-xlabel('theta');
-ylabel('Cost Function');
-title('Theta changing the Cost Function');
+figure(2), plot(theta_attempts,J_examples,'rx','MarkerSize',10), xlabel('theta1'),ylabel('Cost Function'),title('The Cost Function changing with theta1');
+figure(2), grid on, hold on, plot(theta_attempts,J_examples);
+
+% Now fill in the gaps...
+disp('Press enter to see the intermediate Cost Function values for theta1.');
+pause;
+iterations = 120;
+J_change_with_theta = zeros(iterations, 1);
+theta_range = zeros(iterations, 1);
+theta = [0.1];
+for i = 1:iterations
+	theta = [theta+0.001];
+	theta_range(i,:) = theta;
+	J_change_with_theta(i) = computeCost(X, y, theta);
+end
+figure(2), hold on, plot(theta_range,J_change_with_theta,'rx','MarkerSize',5,'color','g');
+
+
 
 % Now we're going to reset the example, and look at how gradient descent calculates
 %  the theta values.
@@ -113,14 +131,24 @@ title('Theta changing the Cost Function');
 % If we change theta by too much each time, we might not find the minimum where the cost function
 % is smallest. So we make alpha very small.
 theta = [0.1];
-alpha = 0.000001;
+% Hint: try changing alpha to 0.0000005, and 0.0000015 to see what happens
+% when you don't configure it properly
+alpha = 0.0000001;
+%alpha = 0.0000005;
+%alpha = 0.0000015;
 iterations = 100;
 [theta, theta_history, J_history] = gradientDescent(X, y, theta, alpha, iterations);
 % theta =  0.16890
-% Looking at theta_history and J_history the final cost function is 1712.1
-% and it converges very quickly to the optimum value.
+% Looking at theta_history and J_history the final cost function is 1712.1.
+disp('Press enter to see a graph of the results of running gradient descent.');
+pause;
+
+disp('Alpha is: ');
+disp(alpha);
+figure(3), plot(theta_history, J_history, '-'), grid on, xlabel('theta'), ylabel('Cost Function'), title('Theta changing the Cost Function');
 
 % Now we can see how the theta found by gradient descent fits the line of best fit to the data
 disp('Press enter to see the line of best fit, using the theta value from gradient descent.');
 pause;
+
 figure(1), plot(X, X*theta, '-'), legend('Example data', 'Line of Best Fit [hypothesis]');
