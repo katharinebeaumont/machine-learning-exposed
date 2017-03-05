@@ -4,6 +4,8 @@
 % against theta, and see how the cost changes with respect
 % to theta. Gradient descent looks at whether the cost is
 % increasing or decreasing, and adjusts theta accordingly.
+%
+% NB This works for single and multivariate linear regression.
 %--------------------------------------------------------%
 
 
