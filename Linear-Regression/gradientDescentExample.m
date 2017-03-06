@@ -103,7 +103,7 @@ figure(2), grid on, hold on, plot(theta_attempts,J_examples);
 % Now fill in the gaps...
 disp('Press enter to see the intermediate Cost Function values for theta1.');
 pause;
-iterations = 120;
+iterations = 130;
 J_change_with_theta = zeros(iterations, 1);
 theta_range = zeros(iterations, 1);
 theta = [0.1];
@@ -131,8 +131,8 @@ figure(2), hold on, plot(theta_range,J_change_with_theta,'rx','MarkerSize',5,'co
 % If we change theta by too much each time, we might not find the minimum where the cost function
 % is smallest. So we make alpha very small.
 theta = [0.1];
-% Hint: try changing alpha to 0.0000005, and 0.0000015 to see what happens
-% when you don't configure it properly
+% Extra intuition hint: try changing alpha to 0.0000005, and 0.0000015 to see what happens
+% when you adjust the learning rate.
 alpha = 0.0000001;
 %alpha = 0.0000005;
 %alpha = 0.0000015;
@@ -145,7 +145,7 @@ pause;
 
 disp('Alpha is: ');
 disp(alpha);
-figure(3), plot(theta_history, J_history, '-'), grid on, xlabel('theta'), ylabel('Cost Function'), title('Theta changing the Cost Function');
+figure(3), plot(theta_history, J_history, '-'), grid on, xlabel('\theta'), ylabel('Cost Function'), title('Theta changing the Cost Function');
 
 % Now we can see how the theta found by gradient descent fits the line of best fit to the data
 disp('Press enter to see the line of best fit, using the theta value from gradient descent.');

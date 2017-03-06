@@ -38,4 +38,4 @@ for i = 1:iterations
 end
 
 % Compare theta1 with the cost function values
-figure(1), plot(theta_history(:,2),J_history,'rx','MarkerSize',5), grid on, ylabel('The Cost Function J'), xlabel('Theta1'), title('How Theta changes the Cost Function J');
+figure(1), plot(theta_history(:,2),J_history,'rx','MarkerSize',5), grid on, ylabel('The Cost Function J'), xlabel('\theta_1'), title('How Theta changes the Cost Function J');
