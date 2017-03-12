@@ -13,6 +13,11 @@ function [theta, theta_history, J_history] = gradientDescentLog(X, y, theta, alp
 
     % Initialise our J_history and theta_history matrices with the 
     %  first values.
+    disp('lambda is');
+    disp(lambda);
+    disp('log cost is');
+    a = computeLogCost(X, y, theta, lambda);
+    disp(a);
     J_history(1) = computeLogCost(X, y, theta, lambda);
     theta_history(1,:) = theta';  
 
