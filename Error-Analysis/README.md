@@ -1,4 +1,4 @@
-#% Error Analysis
+# Error Analysis
 
 In these examples we look at some of the analysis we can do on our models.
 We want to know how well out models a) fit the data,
